@@ -125,7 +125,8 @@ p {
   margin: 0;
 }
 
-ul {
+ul,
+ol {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -426,6 +427,244 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Project blocks — shared by Morpheus, Zen and Face2Face.
+   The structure repeats and the scale reduces; that is what communicates
+   ranking without having to say one project matters less.
+   -------------------------------------------------------------------------- */
+
+.project__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s3);
+}
+
+.project__title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: var(--s1);
+}
+
+.project--featured .project__title {
+  font-size: 40px;
+}
+
+.project__line {
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.project__link {
+  flex: none;
+  padding: 10px 20px;
+}
+
+.project__problem {
+  font-size: 19px;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin-bottom: var(--s4);
+}
+
+/* stack rows are text, not badges */
+.stackrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px var(--s1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: var(--s5);
+}
+
+.stackrow li:not(:last-child)::after {
+  content: " ·";
+  color: var(--hairline-strong);
+}
+
+/* --------------------------------------------------------------------------
+   Morpheus — rail + incident timeline
+   -------------------------------------------------------------------------- */
+
+.project--featured {
+  padding-top: 200px; /* Morpheus gets extra isolation above it */
+}
+
+.morpheus {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: var(--gutter);
+}
+
+.rail__inner {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--s4));
+  border-left: 2px solid var(--ok);
+  padding-left: var(--s2);
+  transition: border-color 600ms ease-out;
+}
+
+.rail__status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  margin-bottom: var(--s3);
+}
+
+.rail__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  transition: background-color 600ms ease-out;
+}
+
+.rail__index {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 2;
+  color: var(--muted);
+}
+
+.rail__index b {
+  color: var(--hairline-strong);
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+/* The timeline is the signature element. Default state is resolved (teal), so
+   that with JavaScript off — or under prefers-reduced-motion — it reads as a
+   finished incident rather than a stuck one. main.js flips it to firing and
+   plays it back. */
+.timeline {
+  position: relative;
+  padding-left: var(--s4);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--ok);
+  transition: background-color 600ms ease-out;
+}
+
+.tl {
+  position: relative;
+  padding-bottom: var(--s4);
+}
+
+.tl--end {
+  padding-bottom: 0;
+}
+
+.tl__dot {
+  position: absolute;
+  left: calc(var(--s4) * -1);
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 4px var(--base);
+  transition: background-color 400ms ease-out, transform 400ms ease-out;
+}
+
+.tl__label {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.tl__num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-right: var(--s1);
+}
+
+.tl__meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--ok);
+  margin-bottom: var(--s1);
+}
+
+.tl__note {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 56ch;
+}
+
+/* --------------------------------------------------------------------------
+   Three decisions
+   -------------------------------------------------------------------------- */
+
+.decisions__title {
+  font-family: var(--font-mono);
+  font-stretch: normal;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: var(--s6) 0 var(--s3);
+}
+
+.decisions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--hairline);
+}
+
+.decisions li {
+  padding: var(--s3) var(--s3) 0 0;
+}
+
+.decisions li + li {
+  padding-left: var(--s3);
+  border-left: 1px solid var(--hairline);
+}
+
+.decisions__head {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s1);
+}
+
+.decisions p:not(.decisions__head) {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 
@@ -450,6 +689,34 @@ section {
 
   .hero__lede {
     max-width: var(--measure);
+  }
+
+  .project--featured {
+    padding-top: var(--s7);
+  }
+
+  /* the rail is a status indicator, not content — the timeline says the same
+     thing inline once there is no room to park it alongside */
+  .morpheus {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .decisions {
+    grid-template-columns: 1fr;
+  }
+
+  .decisions li {
+    padding-right: 0;
+  }
+
+  .decisions li + li {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
   }
 }
 
@@ -477,6 +744,31 @@ section {
   .hero__ctas .btn {
     flex: 1 1 100%;
     text-align: center;
+  }
+
+  .project__head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project__link {
+    align-self: flex-start;
+  }
+
+  .project--featured .project__title {
+    font-size: 28px;
+  }
+
+  .project__problem {
+    font-size: 17px;
+  }
+
+  .timeline {
+    padding-left: var(--s3);
+  }
+
+  .tl__dot {
+    left: calc(var(--s3) * -1);
   }
 
   /* only four destinations and the page scrolls — no hamburger */

@@ -93,6 +93,219 @@
           <!-- cols 8-12 stay empty, deliberately -->
         </div>
       </section>
+
+      <!-- ================= Section 3 — Morpheus ================= -->
+      <section class="project project--featured" id="morpheus">
+        <div class="shell">
+          <p class="eyebrow" id="work">Featured work / 01</p>
+
+          <div class="project__head">
+            <div>
+              <h2 class="project__title">Morpheus</h2>
+              <p class="project__line">
+                Agentic SRE — event-driven, multi-agent incident response.
+              </p>
+            </div>
+            <a
+              class="btn btn--secondary project__link"
+              href="https://github.com/kvsb25/Morpheus"
+              rel="noopener"
+              >GitHub ↗</a
+            >
+          </div>
+
+          <ul class="stackrow">
+            <li>TypeScript</li>
+            <li>LangGraph</li>
+            <li>LangChain</li>
+            <li>Gemini</li>
+            <li>ChromaDB</li>
+            <li>Docker</li>
+            <li>Slack</li>
+            <li>Loki</li>
+            <li>Tempo</li>
+            <li>OpenTelemetry</li>
+            <li>VictoriaMetrics</li>
+            <li>Alertmanager</li>
+            <li>vmalert</li>
+          </ul>
+
+          <div class="morpheus">
+            <!-- sticky status rail -->
+            <aside class="rail" aria-hidden="true">
+              <div class="rail__inner">
+                <p class="rail__status" data-status>
+                  <span class="rail__dot"></span><span data-status-text
+                    >Resolved</span
+                  >
+                </p>
+                <ol class="rail__index">
+                  <li><b>01</b> The how</li>
+                  <li><b>02</b> The why</li>
+                  <li><b>03</b> Review</li>
+                  <li><b>04</b> Remedy</li>
+                </ol>
+              </div>
+            </aside>
+
+            <div class="morpheus__main">
+              <p class="project__problem">
+                An alert fires, a human wakes up, and runs the same triage every
+                time — pull the metric, find the trace, read the logs, guess at
+                the cause. Morpheus runs that triage the moment the alert fires,
+                and stops at a human before anything touches production.
+              </p>
+
+              <p class="visually-hidden">
+                Pipeline, in words: an SLI alert fires in vmalert and is routed
+                by Alertmanager to a webhook that triggers the agent — there is
+                no polling. Phase one, the deterministic analyst queries Tempo,
+                Loki and VictoriaMetrics to establish the mechanical failure
+                chain. Phase two, the interpretation agent reads the repository
+                and commit history to explain why it happened. Phase three, a
+                reviewer audits whether the second follows from the first, and
+                routes back to whichever agent failed if it does not. Phase
+                four, the remediation agent searches runbooks by vector
+                similarity and proposes a script. The graph then interrupts and
+                waits for a human to approve, reject or escalate in Slack.
+                Finally a non-LLM gatekeeper checks the script against a
+                whitelist and executes it.
+              </p>
+
+              <ol class="timeline" data-timeline>
+                <li class="tl">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">Alert fires</p>
+                    <p class="tl__meta">vmalert → Alertmanager → webhook</p>
+                    <p class="tl__note">
+                      13 PromQL SLI rules across runtime, HTTP and database.
+                      Nothing runs until one of them breaks.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="tl">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">
+                      <span class="tl__num">Phase 01</span> The how
+                    </p>
+                    <p class="tl__meta">
+                      deterministicAnalyst · Tempo · Loki · VictoriaMetrics
+                    </p>
+                    <p class="tl__note">
+                      Walks the exemplar from the fired metric to a trace ID, to
+                      the span tree, to the log lines around it. Documents the
+                      mechanical failure chain and is forbidden from
+                      interpreting it.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="tl">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">
+                      <span class="tl__num">Phase 02</span> The why
+                    </p>
+                    <p class="tl__meta">interpretationAgent · GitHub tools</p>
+                    <p class="tl__note">
+                      Takes phase one as fact and reads the repository and
+                      commits since the alert window. Returns a code-level cause
+                      and a process-level one — which change let it through.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="tl">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">
+                      <span class="tl__num">Phase 03</span> Review
+                    </p>
+                    <p class="tl__meta">rcaReviewer · structured output, no tools</p>
+                    <p class="tl__note">
+                      Audits whether the “why” actually follows from the “how”.
+                      Returns APPROVED or REJECTED with a target node, and the
+                      graph routes back to whichever agent overreached.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="tl">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">
+                      <span class="tl__num">Phase 04</span> Remedy
+                    </p>
+                    <p class="tl__meta">remediationAgent · ChromaDB RAG</p>
+                    <p class="tl__note">
+                      Searches the runbooks by vector similarity and checks the
+                      approved-scripts directory, so it can only ever propose
+                      something the executor is actually able to run.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="tl">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">Human gate</p>
+                    <p class="tl__meta">LangGraph interrupt · Slack Block Kit</p>
+                    <p class="tl__note">
+                      State is checkpointed and the graph halts. Approve, reject
+                      or escalate in Slack; the decision is patched into state
+                      and execution resumes from there.
+                    </p>
+                  </div>
+                </li>
+
+                <li class="tl tl--end">
+                  <span class="tl__dot"></span>
+                  <div class="tl__body">
+                    <p class="tl__label">Resolved</p>
+                    <p class="tl__meta">executionGatekeeper · no LLM</p>
+                    <p class="tl__note">
+                      Deterministic code. Validates the script name against the
+                      whitelist and spawns it; anything else pages a human with
+                      a severity derived from the alert.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <h3 class="decisions__title">Three decisions</h3>
+          <ul class="decisions">
+            <li>
+              <p class="decisions__head">Zero polling</p>
+              <p>
+                The agent is triggered by an Alertmanager webhook, not a loop.
+                The system costs nothing when nothing is wrong, which is the
+                normal case.
+              </p>
+            </li>
+            <li>
+              <p class="decisions__head">A reviewer loop</p>
+              <p>
+                A second structured pass audits the causal chain before any fix
+                is proposed. An SRE tool that confidently invents a root cause
+                is worse than no tool.
+              </p>
+            </li>
+            <li>
+              <p class="decisions__head">Capped autonomy</p>
+              <p>
+                The executor runs three whitelisted scripts and only after a
+                human approves in Slack. The agent proposes; it is never the
+                thing that decides.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
   </body>
 </html>
