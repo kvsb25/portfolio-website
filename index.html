@@ -8,6 +8,36 @@
       name="description"
       content="Kovidh Bhati — backend and infrastructure engineer. Morpheus, an event-driven multi-agent SRE system, and Zen, a C++ web micro-framework built on raw sockets."
     />
+    <!-- ────────────────────────────────────────────────────────────────
+         TODO BEFORE LAUNCH: replace this origin with the deployed one.
+         og:url and og:image must be absolute — crawlers do not resolve
+         relative paths reliably, and the card is the first impression when
+         this link is pasted into a Wellfound message or a DM.
+         ──────────────────────────────────────────────────────────────── -->
+    <link rel="canonical" href="https://kovidhbhati.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kovidhbhati.vercel.app/" />
+    <meta
+      property="og:title"
+      content="Kovidh Bhati — Backend &amp; Infrastructure Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Morpheus, an event-driven multi-agent SRE system, and Zen, a C++ web micro-framework written from the socket up."
+    />
+    <meta
+      property="og:image"
+      content="https://kovidhbhati.vercel.app/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Kovidh Bhati — Backend and Infrastructure Engineer. Morpheus: agentic SRE, event-driven multi-agent incident response."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
       href="assets/fonts/archivo-expanded-var.woff2"
@@ -459,6 +489,47 @@ app.listen(8080, []() {
             through NAT and connect peer-to-peer, so audio, video and files move
             directly between them. Chats are held in the room and are not
             persisted after the session ends.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= Section 6 — Also on GitHub ================= -->
+      <section class="also" id="also">
+        <div class="shell">
+          <p class="eyebrow">Also on GitHub</p>
+
+          <ul class="also__list">
+            <li>
+              <a href="https://github.com/kvsb25/CLI-ToDo-with-gRPC" rel="noopener"
+                >CLI-ToDo-with-gRPC</a
+              >
+              <span class="also__desc">Task manager over gRPC</span>
+              <span class="also__lang">JavaScript</span>
+            </li>
+            <li>
+              <a
+                href="https://github.com/kvsb25/Garbage-Management-System"
+                rel="noopener"
+                >Garbage-Management-System</a
+              >
+              <span class="also__desc">Ticket-based garbage service system</span>
+              <span class="also__lang">JavaScript</span>
+            </li>
+            <li>
+              <a href="https://github.com/kvsb25/ProgressionPad" rel="noopener"
+                >ProgressionPad</a
+              >
+              <span class="also__desc"
+                >Browser extension that builds chord progressions from a grid of
+                harmonically compatible chords</span
+              >
+              <span class="also__lang">JavaScript</span>
+            </li>
+          </ul>
+
+          <p class="also__more">
+            23 public repositories →
+            <a href="https://github.com/kvsb25" rel="noopener">github.com/kvsb25</a>
           </p>
         </div>
       </section>

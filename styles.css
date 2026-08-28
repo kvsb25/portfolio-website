@@ -759,6 +759,73 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Section 6 — Also on GitHub
+   Text rows, not cards. This list has no meaningful sequence, so unlike the
+   featured work it is not numbered.
+   -------------------------------------------------------------------------- */
+
+.also__list {
+  border-top: 1px solid var(--hairline);
+}
+
+.also__list li {
+  display: grid;
+  grid-template-columns: 4fr 6fr 2fr;
+  gap: var(--gutter);
+  align-items: baseline;
+  padding-block: var(--s2);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.also__list a {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.also__list a:hover {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.also__desc {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.also__lang {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
+
+.also__more {
+  margin-top: var(--s3);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.also__more a {
+  color: var(--ok);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.also__more a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* --------------------------------------------------------------------------
    Section 7 — Experience (ledger)
    Two-column date/content split with a hairline between them. The dates carry
    real information here — recency, and that these overlap with coursework.
@@ -1158,6 +1225,15 @@ section {
 
   .code code {
     font-size: 12px;
+  }
+
+  .also__list li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .also__lang {
+    text-align: left;
   }
 
   /* dates become mono eyebrows above each role rather than a column */

@@ -1,0 +1,135 @@
+<!doctype html>
+<!--
+  Source for og.png. This is not served — it exists so the card can be
+  regenerated instead of being an undocumented binary in the repo.
+
+  Regenerate from the repo root:
+
+    chrome --headless=new --disable-gpu --hide-scrollbars \
+      --window-size=1200,630 --screenshot=og.png \
+      assets/og-source.html
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: "Archivo";
+        src: url("fonts/archivo-expanded-var.woff2") format("woff2");
+        font-weight: 700 800;
+        font-stretch: 100% 125%;
+      }
+      @font-face {
+        font-family: "IBM Plex Sans";
+        src: url("fonts/plex-sans-var.woff2") format("woff2");
+        font-weight: 400 500;
+      }
+      @font-face {
+        font-family: "IBM Plex Mono";
+        src: url("fonts/plex-mono-600.woff2") format("woff2");
+        font-weight: 600;
+      }
+
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #e8eaed;
+        color: #14161a;
+        font-family: "IBM Plex Sans", sans-serif;
+        padding: 64px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #5b6472;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 40px;
+        height: 3px;
+        background: #e5a00d;
+      }
+
+      h1 {
+        font-family: "Archivo", sans-serif;
+        font-stretch: 125%;
+        font-weight: 800;
+        font-size: 128px;
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+      }
+
+      .role {
+        font-size: 34px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        margin-top: 20px;
+      }
+
+      .rule {
+        border-top: 1px solid rgba(20, 22, 26, 0.12);
+        padding-top: 24px;
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 600;
+        font-size: 19px;
+        letter-spacing: 0.02em;
+      }
+
+      .rule b {
+        font-size: 22px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .rule span {
+        color: #5b6472;
+        font-weight: 400;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #0c6e5a;
+        align-self: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p class="eyebrow">Open to SDE roles · Graduating May 2027</p>
+    </div>
+
+    <div>
+      <h1>Kovidh<br />Bhati</h1>
+      <p class="role">Backend &amp; Infrastructure Engineer</p>
+    </div>
+
+    <div class="rule">
+      <span class="dot"></span>
+      <b>Morpheus</b>
+      <span>Agentic SRE — event-driven, multi-agent incident response</span>
+    </div>
+  </body>
+</html>

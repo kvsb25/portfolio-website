@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="KB">
+  <rect width="32" height="32" rx="4" fill="#14161A"/>
+  <!-- K, drawn as paths so the mark does not depend on a font being present -->
+  <path d="M8 6h4.2v20H8z" fill="#FDFDFC"/>
+  <path d="M12 15.4 19.6 6h5.2l-8.6 10.4z" fill="#E5A00D"/>
+  <path d="M15.6 15.2 24.8 26h-5.2L12 16.8z" fill="#0C6E5A"/>
+</svg>
