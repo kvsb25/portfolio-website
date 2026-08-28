@@ -94,6 +94,18 @@
         </div>
       </section>
 
+      <!-- ================= Section 2 — Credibility strip ================= -->
+      <aside class="creds">
+        <div class="shell">
+          <ul class="creds__list">
+            <li>Top 4.6% · Flipkart Gridlock 2.0</li>
+            <li>Interned at TEKNOSys · StudyBase</li>
+            <li>CGPA 8.73 / 10 · VIT</li>
+            <li>Azure AZ-900 + IBM AI Fundamentals</li>
+          </ul>
+        </div>
+      </aside>
+
       <!-- ================= Section 3 — Morpheus ================= -->
       <section class="project project--featured" id="morpheus">
         <div class="shell">
@@ -304,6 +316,150 @@
               </p>
             </li>
           </ul>
+        </div>
+      </section>
+
+      <!-- ================= Section 4 — Zen ================= -->
+      <section class="project" id="zen">
+        <div class="shell">
+          <p class="eyebrow">Featured work / 02</p>
+
+          <div class="project__head">
+            <div>
+              <h2 class="project__title">Zen</h2>
+              <p class="project__line">
+                A C++ web micro-framework, built on Winsock2. Express-inspired,
+                written from the socket up.
+              </p>
+            </div>
+            <a
+              class="btn btn--secondary project__link"
+              href="https://github.com/kvsb25/Zen"
+              rel="noopener"
+              >GitHub ↗</a
+            >
+          </div>
+
+          <ul class="stackrow">
+            <li>C++</li>
+            <li>Winsock2</li>
+            <li>TCP/IP</li>
+            <li>HTTP</li>
+          </ul>
+
+          <div class="zen">
+            <figure class="code">
+              <figcaption class="visually-hidden">
+                A Zen application: a default middleware that logs every request,
+                a route with a path parameter that content-negotiates between
+                JSON and HTML, an error middleware, and the listen call.
+              </figcaption>
+              <pre><code>Zen app;
+
+<span class="c">// DEFAULT — runs for every request</span>
+app.use([](http::Request&amp; req, http::Response&amp; res) {
+    std::cout &lt;&lt; req.method &lt;&lt; " " &lt;&lt; req.path &lt;&lt; std::endl;
+});
+
+<span class="c">// PATH — method + route, :id lands in req.params</span>
+app.use("GET", "/users/:id", [](http::Request&amp; req, http::Response&amp; res) {
+    auto id = req.params["id"];
+
+    res.format("Accept", {
+        {"application/json", [&amp;]() { res.json("{\"id\":\"" + id + "\"}"); }},
+        {"text/html",        [&amp;]() { res.send("&lt;h1&gt;User " + id + "&lt;/h1&gt;"); }}
+    });
+});
+
+<span class="c">// ERR — centralised, catches ZenErr thrown anywhere above</span>
+app.use([](const ZenErr&amp; e, http::Request&amp; req, http::Response&amp; res) {
+    res.status(500).send(e.what());
+});
+
+app.listen(8080, []() {
+    std::cout &lt;&lt; "Listening on 8080\n";
+});</code></pre>
+            </figure>
+
+            <ul class="zen__notes">
+              <li>
+                <p class="decisions__head">Connection pool</p>
+                <p>
+                  The accept loop hands every socket straight to a thread pool
+                  sized to <code>hardware_concurrency()</code>, so request
+                  handling never blocks accepting and there is no thread per
+                  request.
+                </p>
+              </li>
+              <li>
+                <p class="decisions__head">RAII ClientSession</p>
+                <p>
+                  Move-only: copy construction and assignment are deleted, so a
+                  live connection handle has exactly one owner and moves cleanly
+                  into a pool task.
+                </p>
+              </li>
+              <li>
+                <p class="decisions__head">3-tier middleware</p>
+                <p>
+                  Default, Path and Error tiers run in deterministic insertion
+                  order, with routing centralised and errors funnelled to one
+                  place rather than handled per route.
+                </p>
+              </li>
+              <li>
+                <p class="decisions__head">Custom parsers</p>
+                <p>
+                  Hand-written HTTP and URL parsers, and a content negotiator
+                  that ranks <code>Accept</code> values through a priority queue
+                  and falls back to 406 when nothing matches.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Section 5 — Face2Face ================= -->
+      <section class="project project--compact" id="face2face">
+        <div class="shell">
+          <p class="eyebrow">Featured work / 03</p>
+
+          <div class="project__head">
+            <div>
+              <h2 class="project__title">Face2Face</h2>
+              <p class="project__line">
+                Private one-to-one video conferencing with real-time chat and
+                file sharing.
+              </p>
+            </div>
+            <!-- TODO: once deployed, add before the GitHub link and give it
+                 class="btn btn--primary project__link":
+                 <a class="btn btn--primary project__link" href="LIVE_URL"
+                    rel="noopener">Live demo ↗</a> -->
+            <a
+              class="btn btn--secondary project__link"
+              href="https://github.com/kvsb25/Face2Face"
+              rel="noopener"
+              >GitHub ↗</a
+            >
+          </div>
+
+          <ul class="stackrow">
+            <li>JavaScript</li>
+            <li>Express.js</li>
+            <li>WebRTC</li>
+            <li>WebSocket</li>
+            <li>Docker</li>
+          </ul>
+
+          <p class="project__problem">
+            A WebSocket signaling server handles the WebRTC offer, answer and
+            ICE candidate exchange that lets two browsers find each other
+            through NAT and connect peer-to-peer, so audio, video and files move
+            directly between them. Chats are held in the room and are not
+            persisted after the session ends.
+          </p>
         </div>
       </section>
     </main>

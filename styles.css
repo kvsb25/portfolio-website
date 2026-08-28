@@ -427,6 +427,42 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Section 2 — Credibility strip
+   Clears every credential filter in one horizontal glance, so the rest of the
+   page can be pure engineering.
+   -------------------------------------------------------------------------- */
+
+.creds {
+  border-block: 1px solid var(--hairline);
+  background: var(--panel);
+  padding-block: 0;
+}
+
+.creds__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  min-height: 56px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.creds__list li {
+  padding: var(--s1) var(--s3);
+}
+
+.creds__list li:first-child {
+  padding-left: 0;
+  color: var(--ink);
+}
+
+.creds__list li + li {
+  border-left: 1px solid var(--hairline);
+}
+
+/* --------------------------------------------------------------------------
    Project blocks — shared by Morpheus, Zen and Face2Face.
    The structure repeats and the scale reduces; that is what communicates
    ranking without having to say one project matters less.
@@ -665,6 +701,64 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Zen — code block + decision list
+   Mirrors Morpheus at half the vertical space: same heading treatment, one
+   hero artifact instead of a timeline.
+   -------------------------------------------------------------------------- */
+
+.zen {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--s5);
+  align-items: start;
+}
+
+.code {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  padding: var(--s3);
+  overflow-x: auto; /* long lines scroll here, never the page */
+}
+
+.code pre {
+  margin: 0;
+}
+
+.code code,
+.zen__notes code {
+  font-family: var(--font-mono);
+  /* 13px keeps the widest line in the snippet (75 chars) inside the panel at
+     1240px; overflow-x on .code is the fallback below that */
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 4;
+}
+
+.zen__notes code {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.code .c {
+  color: var(--muted);
+}
+
+.zen__notes li + li {
+  margin-top: var(--s3);
+}
+
+.zen__notes p:not(.decisions__head) {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.project--compact .project__problem {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 
@@ -718,6 +812,11 @@ section {
     border-left: 0;
     border-top: 1px solid var(--hairline);
   }
+
+  .zen {
+    grid-template-columns: 1fr;
+    gap: var(--s4);
+  }
 }
 
 @media (max-width: 599px) {
@@ -769,6 +868,39 @@ section {
 
   .tl__dot {
     left: calc(var(--s3) * -1);
+  }
+
+  .creds__list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .creds__list li,
+  .creds__list li:first-child {
+    padding: 10px var(--s2);
+  }
+
+  .creds__list li + li {
+    border-left: 0;
+  }
+
+  .creds__list li:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .creds__list li:nth-child(even) {
+    border-left: 1px solid var(--hairline);
+  }
+
+  .creds__list li:nth-child(n + 3) {
+    border-top: 1px solid var(--hairline);
+  }
+
+  .code {
+    padding: var(--s2);
+  }
+
+  .code code {
+    font-size: 12px;
   }
 
   /* only four destinations and the page scrolls — no hamburger */
