@@ -759,6 +759,263 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Section 7 — Experience (ledger)
+   Two-column date/content split with a hairline between them. The dates carry
+   real information here — recency, and that these overlap with coursework.
+   -------------------------------------------------------------------------- */
+
+.ledger__row {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: var(--gutter);
+  padding-block: var(--s4);
+  border-top: 1px solid var(--hairline);
+}
+
+.ledger__row:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.ledger__date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  padding-top: 3px;
+}
+
+.ledger__body {
+  border-left: 1px solid var(--hairline);
+  padding-left: var(--s3);
+}
+
+.ledger__role {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.ledger__org {
+  display: block;
+  font-family: var(--font-body);
+  font-stretch: normal;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ok);
+  margin-top: 2px;
+}
+
+.ledger__where {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  margin-top: var(--s1);
+}
+
+.ledger__points {
+  margin-top: var(--s2);
+  max-width: var(--measure);
+}
+
+.ledger__points li {
+  position: relative;
+  padding-left: var(--s2);
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.ledger__points li + li {
+  margin-top: var(--s1);
+}
+
+.ledger__points li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--hairline-strong);
+}
+
+/* --------------------------------------------------------------------------
+   Sections 8 & 9 — Stack, Education
+   Plain rows. No proficiency bars: "C++ 85%" is unfalsifiable.
+   -------------------------------------------------------------------------- */
+
+.stack__row {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: var(--gutter);
+  padding-block: var(--s3);
+  border-top: 1px solid var(--hairline);
+}
+
+.stack__row:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.stack dt {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 4px;
+}
+
+.stack dd {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.stack--small dd {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Section 10 — Contact
+   -------------------------------------------------------------------------- */
+
+.contact {
+  border-top: 1px solid var(--hairline);
+}
+
+.contact__line {
+  font-size: 19px;
+  max-width: 44ch;
+  margin-bottom: var(--s4);
+}
+
+.contact__email {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  margin-bottom: var(--s2);
+}
+
+.contact__email a {
+  text-decoration: none;
+  border-bottom: 2px solid var(--hairline);
+  transition: border-color 150ms ease-out, color 150ms ease-out;
+  word-break: break-word;
+}
+
+.contact__email a:hover {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+/* injected by main.js — never rendered when JS is off, so there is no
+   button that silently does nothing */
+.copy-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.copy-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.copy-btn[data-copied] {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.contact__phone {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  margin-bottom: var(--s3);
+}
+
+.contact__phone a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.contact__phone a:hover {
+  color: var(--ink);
+}
+
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.contact__links li:not(:last-child)::after {
+  content: "·";
+  margin-left: var(--s2);
+  color: var(--hairline-strong);
+}
+
+.contact__links a {
+  color: var(--ok);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.contact__links a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding-block: var(--s4);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+
+.footer a {
+  color: var(--ok);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.footer a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
 
@@ -901,6 +1158,38 @@ section {
 
   .code code {
     font-size: 12px;
+  }
+
+  /* dates become mono eyebrows above each role rather than a column */
+  .ledger__row,
+  .stack__row {
+    grid-template-columns: 1fr;
+    gap: var(--s1);
+  }
+
+  .ledger__date {
+    padding-top: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .ledger__body {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .stack dt {
+    padding-top: 0;
+  }
+
+  .contact__line {
+    font-size: 17px;
+  }
+
+  .contact__email {
+    font-size: 24px;
   }
 
   /* only four destinations and the page scrolls — no hamburger */
