@@ -620,7 +620,7 @@ section {
   border-radius: 50%;
   background: var(--ok);
   box-shadow: 0 0 0 4px var(--base);
-  transition: background-color 400ms ease-out, transform 400ms ease-out;
+  transition: background-color 400ms ease-out, box-shadow 400ms ease-out;
 }
 
 .tl__label {
@@ -653,6 +653,106 @@ section {
   color: var(--muted);
   font-size: 16px;
   max-width: 56ch;
+}
+
+/* --- JS-driven incident states -------------------------------------------
+   main.js adds .is-firing to #morpheus on load and .is-resolved once the last
+   node has scrolled in. Neither class exists without JavaScript, so the
+   stylesheet's default above — a resolved incident — is what a visitor with
+   JS off keeps. The two classes are mutually exclusive: main.js drops
+   .is-firing as it adds .is-resolved, so neither has to out-specify the
+   other.
+   ------------------------------------------------------------------------- */
+
+.is-firing .rail__inner {
+  border-color: var(--signal);
+}
+
+.is-firing .rail__dot {
+  background: var(--signal);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.is-firing .timeline::before {
+  background: var(--hairline);
+}
+
+.is-firing .timeline .tl__dot {
+  background: var(--base);
+  box-shadow: 0 0 0 4px var(--base), inset 0 0 0 2px var(--signal);
+}
+
+.is-firing .timeline .tl.is-lit .tl__dot {
+  background: var(--signal);
+}
+
+.is-firing .tl__meta {
+  color: var(--muted);
+  transition: color 600ms ease-out;
+}
+
+/* the growing spine, injected by main.js so it never appears without it */
+.tl__spine {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--signal);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 500ms ease-out, background-color 600ms ease-out;
+}
+
+.is-resolved .tl__spine {
+  background: var(--ok);
+}
+
+.is-resolved .timeline::before {
+  background: var(--ok);
+}
+
+.is-resolved .timeline .tl__dot {
+  background: var(--ok);
+  box-shadow: 0 0 0 4px var(--base), inset 0 0 0 2px var(--ok);
+}
+
+.is-resolved .rail__inner {
+  border-color: var(--ok);
+}
+
+.is-resolved .rail__dot {
+  background: var(--ok);
+  animation: none;
+}
+
+.is-resolved .tl__meta {
+  color: var(--ok);
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* --- section entry --------------------------------------------------------
+   .js-reveal is added by main.js rather than declared here, so a stylesheet
+   that loads without its script can never hide the page.
+   ------------------------------------------------------------------------- */
+
+.js-reveal main > section,
+.js-reveal main > aside {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+
+.js-reveal main > .is-in {
+  opacity: 1;
+  /* dropped rather than left at 0, so the sticky rail inside Morpheus is not
+     stuck inside a transformed containing block */
+  transform: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -1099,6 +1199,13 @@ section {
 @media (max-width: 899px) {
   :root {
     --s7: 80px;
+  }
+
+  /* collapse to one column rather than keeping 12 tracks: eleven 24px
+     gutters are a 264px floor on the grid's width, which is most of a phone
+     viewport and pushes the whole page into horizontal scroll */
+  .grid12 {
+    grid-template-columns: 1fr;
   }
 
   .hero__col {
