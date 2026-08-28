@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+.vercel/
+*.log
+
+# Kept local on purpose: the footer links this repo publicly, and the spec is
+# an internal positioning document. Remove this line if you want it published.
+portfolio-spec.md
