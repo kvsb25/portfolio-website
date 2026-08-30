@@ -93,7 +93,16 @@
           if (!timer) timer = window.setTimeout(flush, 0);
         });
       },
-      { rootMargin: "0px 0px -20% 0px", threshold: 0 }
+      // Cropping the bottom half of the root puts the trigger line at the
+      // middle of the viewport, so a node lights as it reaches the centre of
+      // the screen rather than while it is still down near the fold.
+      //
+      // Cropping only the bottom — rather than collapsing the root to a line
+      // with "-50% 0px -50% 0px" — means everything already above the centre
+      // counts as intersecting. A node can then never be skipped by a fast
+      // scroll or an anchor jump, which would otherwise leave the spine part
+      // grown and the incident stuck firing.
+      { rootMargin: "0px 0px -50% 0px", threshold: 0 }
     );
 
     nodes.forEach(function (node) {
