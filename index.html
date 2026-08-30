@@ -222,7 +222,7 @@
                     <p class="tl__label">Alert fires</p>
                     <p class="tl__meta">vmalert → Alertmanager → webhook</p>
                     <p class="tl__note">
-                      13 PromQL SLI rules across runtime, HTTP and database.
+                      SLI alert rules across runtime, HTTP and database.
                       Nothing runs until one of them breaks.
                     </p>
                   </div>
@@ -254,9 +254,9 @@
                     </p>
                     <p class="tl__meta">interpretationAgent · GitHub tools</p>
                     <p class="tl__note">
-                      Takes phase one as fact and reads the repository and
-                      commits since the alert window. Returns a code-level cause
-                      and a process-level one — which change let it through.
+                      Takes phase one as fact and interprets the root cause of
+                      the issue. Can access the code and commit history
+                      for better interpretation.
                     </p>
                   </div>
                 </li>
@@ -270,8 +270,8 @@
                     <p class="tl__meta">rcaReviewer · structured output, no tools</p>
                     <p class="tl__note">
                       Audits whether the “why” actually follows from the “how”.
-                      Returns APPROVED or REJECTED with a target node, and the
-                      graph routes back to whichever agent overreached.
+                      Reviews the work of Determinitic agent and 
+                      Interpretation agent against guidelines.
                     </p>
                   </div>
                 </li>
@@ -284,9 +284,10 @@
                     </p>
                     <p class="tl__meta">remediationAgent · ChromaDB RAG</p>
                     <p class="tl__note">
-                      Searches the runbooks by vector similarity and checks the
-                      approved-scripts directory, so it can only ever propose
-                      something the executor is actually able to run.
+                      Proposes remediation for the diagnosed issue.
+                      Can search the runbooks by vector similarity and 
+                      check the approved-scripts directory, so it can also 
+                      propose remediation when any human is not available for approval
                     </p>
                   </div>
                 </li>
@@ -297,9 +298,9 @@
                     <p class="tl__label">Human gate</p>
                     <p class="tl__meta">LangGraph interrupt · Slack Block Kit</p>
                     <p class="tl__note">
-                      State is checkpointed and the graph halts. Approve, reject
-                      or escalate in Slack; the decision is patched into state
-                      and execution resumes from there.
+                      State is checkpointed and the graph halts. Waits for 
+                      human approval from slack; the decision is patched into 
+                      state and execution resumes from there.
                     </p>
                   </div>
                 </li>
@@ -310,9 +311,8 @@
                     <p class="tl__label">Resolved</p>
                     <p class="tl__meta">executionGatekeeper · no LLM</p>
                     <p class="tl__note">
-                      Deterministic code. Validates the script name against the
-                      whitelist and spawns it; anything else pages a human with
-                      a severity derived from the alert.
+                      Deterministic code. Executes the finalized remediation. 
+                      Notifies the human with incident report.
                     </p>
                   </div>
                 </li>
@@ -341,7 +341,7 @@
             <li>
               <p class="decisions__head">Capped autonomy</p>
               <p>
-                The executor runs three whitelisted scripts and only after a
+                The executor runs the remediation script only after a
                 human approves in Slack. The agent proposes; it is never the
                 thing that decides.
               </p>
@@ -529,7 +529,7 @@ app.listen(8080, []() {
           </ul>
 
           <p class="also__more">
-            23 public repositories →
+            24 public repositories →
             <a href="https://github.com/kvsb25" rel="noopener">github.com/kvsb25</a>
           </p>
         </div>
@@ -596,7 +596,7 @@ app.listen(8080, []() {
                   Junior Developer Intern
                   <span class="ledger__org">StudyBase Pvt. Ltd.</span>
                 </h3>
-                <p class="ledger__where">Remote</p>
+                <p class="ledger__where">Remote, India — Jaipur, Rajasthan, India</p>
                 <ul class="ledger__points">
                   <li>
                     Built a greenfield React address book using react-window
