@@ -139,7 +139,45 @@
   }
 
   /* ------------------------------------------------------------------
-     3. Copy the email
+     3. Demo capture
+     The file is 2.8MB, so it ships with preload="none" and is not fetched
+     until it is about to be seen. It plays muted on entry and pauses on
+     exit — a recruiter should not have to decide to press play, and a
+     phone should not spend the data if they never scroll this far.
+     ------------------------------------------------------------------ */
+
+  function playDemoInView() {
+    var video = document.querySelector("[data-demo]");
+    if (!video) return;
+
+    var started = false;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (!started) {
+              started = true;
+              video.preload = "auto";
+            }
+            // play() rejects on its own if the browser declines; muted
+            // autoplay is allowed, but there is no reason to make noise
+            // in the console when it is not
+            var attempt = video.play();
+            if (attempt && attempt.catch) attempt.catch(function () {});
+          } else if (started) {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(video);
+  }
+
+  /* ------------------------------------------------------------------
+     4. Copy the email
      ------------------------------------------------------------------ */
 
   function addCopyControl() {
@@ -179,5 +217,8 @@
   if (!reduced && canObserve) {
     revealSections();
     playTimeline();
+    // under reduced motion the poster and controls stay, so the demo is
+    // still there to be watched — it just is not started for anyone
+    playDemoInView();
   }
 })();

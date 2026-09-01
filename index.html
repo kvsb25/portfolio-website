@@ -320,6 +320,42 @@
             </div>
           </div>
 
+          <!-- Proof, placed immediately after the pipeline it demonstrates.
+               The poster is the last frame on purpose: the payoff is the
+               Slack approval request, so it is what a visitor sees even if
+               they never press play. -->
+          <figure class="demo">
+            <video
+              class="demo__video"
+              src="morpheus_demo.mp4"
+              poster="assets/morpheus-demo-poster.jpg"
+              width="1920"
+              height="1080"
+              preload="none"
+              muted
+              loop
+              playsinline
+              controls
+              data-demo
+              aria-describedby="demo-caption"
+            >
+              <a href="morpheus_demo.mp4"
+                >Download the screen capture (MP4, 2.8&nbsp;MB)</a
+              >
+            </video>
+
+            <figcaption class="demo__cap" id="demo-caption">
+              <span class="demo__eyebrow">Live capture · 19s · no audio</span>
+              An alert fires on <code>db_client_connections_usage</code> and the
+              graph runs unattended until it reaches the gate. Slack gets the
+              proposed action — <code>flush_pg_connections.sh</code>, scoped to
+              one service, with the agent's reasoning — behind Approve, Reject
+              and Escalate. The terminal on the right shows what matters:
+              <em>paused before executionGatekeeper, awaiting humanApproval</em>.
+              Nothing runs until a person clicks.
+            </figcaption>
+          </figure>
+
           <h3 class="decisions__title">Three decisions</h3>
           <ul class="decisions">
             <li>

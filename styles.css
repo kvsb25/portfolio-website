@@ -756,6 +756,56 @@ section {
 }
 
 /* --------------------------------------------------------------------------
+   Morpheus demo capture
+   Full width, because a 1920x1080 screen recording of a terminal is only
+   legible if it is given the whole grid.
+   -------------------------------------------------------------------------- */
+
+.demo {
+  margin: var(--s6) 0 0;
+}
+
+.demo__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* reserved from the file's real dimensions so nothing shifts on load */
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+}
+
+.demo__cap {
+  margin-top: var(--s2);
+  max-width: var(--measure);
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.demo__cap code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.demo__cap em {
+  font-style: normal;
+  color: var(--ink);
+}
+
+.demo__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--s1);
+}
+
+/* --------------------------------------------------------------------------
    Three decisions
    -------------------------------------------------------------------------- */
 
